@@ -67,22 +67,21 @@
             transform: scale(1.05); /* 放大圖片 */
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* 更強的浮凸效果 */
         }
-        .image-grid a:hover img {
-            transform: scale(1.1); /* 放大圖片內部 */
-        }
         footer {
-            position: relative;
-            padding: 20px;
+            width: 100%; /* 恢复全宽 */
+            padding: 10px 20px; /* 调整footer的厚度 */
             background-color: #2c3e50;
             color: #ffffff;
-            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .footer-content {
+            flex: 1;
             text-align: center;
         }
         .back-button {
-            position: absolute;
-            right: 20px;
-            bottom: 20px;
-            padding: 10px 20px;
+            padding: 8px 16px; /* 调整按钮的厚度 */
             font-size: 16px;
             color: #ffffff;
             background-color: #28a745;
@@ -112,7 +111,7 @@
                 <td class="content-left">
                     <p>ISO 14064-1</p>
                     <p>ISO 14067</p>
-                    <p>ISO 50001<p>
+                    <p>ISO 50001</p>
                 </td>
                 <td>
                     <div class="image-grid">
@@ -127,8 +126,8 @@
         </table>
     </div>
     <footer>
+        <div class="footer-content">© 2024 由景沛低碳管理方案團隊製作</div>
         <a href="https://sethjesus.github.io/Maincarbon/Maincarbon.html" class="back-button">回首頁</a>
-        <p>© 2024 由景沛低碳管理方案團隊製作</p>
     </footer>
 </body>
 </html>
