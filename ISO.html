@@ -1,146 +1,212 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>皓樣ISO 查驗證</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-image: url('https://github.com/Sethjesus/Photo/blob/main/sky4.jpg?raw=true'); /* 插入底圖的路徑 */
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            margin: 0;
-            padding: 0;
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            flex: 1;
-            background-color: rgba(255, 255, 255, 0.4); /* 半透明背景 */
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-        h1 {
-            text-align: center;
-            margin-top: 20px;
-            color: #007bff;
-            font-size: 48px;
-        }
-        .content-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        .content-table td {
-            padding: 20px;
-            border: 1px solid #dddddd;
-            vertical-align: middle;
-        }
-        .first-row td {
-            background-color: #007bff; /* 綠色背景 */
-            color: #ffffff; /* 白色文字 */
-            text-align: left;
-        }
-        .content-left {
-            text-align: left; /* 靠左對齊 */
-        }
-        /* 突顯ISO標題 */
-        .highlight {
-            font-size: 24px; /* 調整字體大小 */
-            font-weight: bold; /* 加粗字體 */
-            color: #071a2e; /* 字體顏色 */
-        }
-        .image-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-top: 10px;
-        }
-        .image-grid a {
-            display: block;
-            overflow: hidden; /* 確保圖片放大時不會超出範圍 */
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 初始的浮凸效果 */
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* 動畫效果 */
-        }
-        .image-grid img {
-            width: 100%;
-            border-radius: 8px;
-            transition: transform 0.3s ease; /* 動畫效果 */
-        }
-        .image-grid a:hover {
-            transform: scale(1.05); /* 放大圖片 */
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* 更強的浮凸效果 */
-        }
-        footer {
-            position: relative;
-            padding: 20px;
-            background-color: rgba(44, 62, 80, 0.9); /* 半透明背景 */
-            color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .footer-content {
-            text-align: center;
-            flex: 1;
-        }
-        .back-button {
-            position: absolute;
-            right: 20px;
-            padding: 10px 20px;
-            font-size: 16px;
-            color: #ffffff;
-            background-color: #28a745;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
-        }
-        .back-button:hover {
-            background-color: #218838; /* 更深的綠色 */
-        }
-        /* 左上角 logo */
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>皓樣 ISO 查驗證</title>
+
+<style>
+/* ===============================
+   全域骨架（footer 穩定）
+================================ */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    color: #333;
+
+    background-image: url('https://github.com/Sethjesus/Photo/blob/main/sky4.jpg?raw=true');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* 主內容撐滿高度 */
+main {
+    flex: 1;
+}
+
+/* ===============================
+   左上角 Logo（保留動畫）
+================================ */
 .logo {
-    position: absolute;   /* 固定在頁面左上角 */
+    position: fixed;
     top: 15px;
     left: 15px;
     width: 60px;
-    animation: floatLogo 3s ease-in-out infinite; /* 動態效果 */
+    z-index: 9999;
+    animation: floatLogo 3s ease-in-out infinite;
 }
-
 @keyframes floatLogo {
-    0% { transform: scale(1) translateY(0px); }
+    0% { transform: scale(1) translateY(0); }
     50% { transform: scale(1.1) translateY(-5px); }
-    100% { transform: scale(1) translateY(0px); }
+    100% { transform: scale(1) translateY(0); }
 }
 
-    </style>
+/* ===============================
+   內容容器
+================================ */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: rgba(255,255,255,0.4);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,.2);
+}
+
+/* ===============================
+   標題
+================================ */
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    color: #007bff;
+    font-size: 48px;
+}
+
+/* ===============================
+   表格
+================================ */
+.content-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+.content-table td {
+    padding: 20px;
+    border: 1px solid #dddddd;
+    vertical-align: middle;
+}
+.first-row td {
+    background-color: #007bff;
+    color: #ffffff;
+    text-align: left;
+    font-size: 22px;
+    font-weight: bold;
+}
+.content-left {
+    text-align: left;
+}
+
+/* ISO 標題 */
+.highlight {
+    font-size: 24px;
+    font-weight: bold;
+    color: #071a2e;
+}
+
+/* ===============================
+   圖片格線
+================================ */
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+.image-grid a {
+    display: block;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,.2);
+    transition: transform .3s ease, box-shadow .3s ease;
+}
+.image-grid img {
+    width: 100%;
+    border-radius: 8px;
+    transition: transform .3s ease;
+}
+.image-grid a:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0,0,0,.3);
+}
+
+/* ===============================
+   統一浮動回首頁（全站唯一）
+================================ */
+.float-home-btn{
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+
+    width: 64px;
+    height: 72px;
+    border-radius: 18px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+
+    background: linear-gradient(135deg,#0b6bff,#00c6ff);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+
+    box-shadow: 0 14px 30px rgba(0,0,0,.35);
+    z-index: 9999;
+
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+.float-home-btn:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 18px 38px rgba(0,0,0,.45);
+}
+.float-home-btn .icon { font-size: 24px; }
+.float-home-btn .label { font-size: 12px; }
+
+@media (max-width: 768px){
+    .float-home-btn{
+        width: 56px;
+        height: 64px;
+        right: 16px;
+        bottom: 16px;
+    }
+}
+
+/* ===============================
+   Footer（不 fixed）
+================================ */
+footer {
+    text-align: center;
+    padding: 18px;
+    background-color: rgba(44,62,80,.9);
+    color: #ffffff;
+}
+</style>
 </head>
+
 <body>
+
+<!-- Logo -->
+<img src="https://github.com/Sethjesus/Photo/blob/main/UDM%20New%20Logo.jpg?raw=true"
+     alt="公司Logo"
+     class="logo">
+
+<!-- 統一回首頁 -->
+<a href="https://jpesg.netlify.app/" class="float-home-btn">
+    <span class="icon">🏠</span>
+    <span class="label">回首頁</span>
+</a>
+
+<main>
     <div class="container">
-        <h1><img src="https://github.com/Sethjesus/Photo/blob/main/UDM%20New%20Logo.jpg?raw=true" 
-     alt="公司Logo" class="logo">
-</h1>
         <h1>ISO 查驗證</h1>
+
         <table class="content-table">
             <tr class="first-row">
-                <td>
-                    <p style="font-size: 22px; font-weight: bold;">內容</p> <!-- 改變文字大小並加粗 -->
-                </td>
-                <td>
-                    <p style="font-size: 22px; font-weight: bold;">合作夥伴</p> <!-- 改變文字大小並加粗 -->
-                </td>
+                <td>內容</td>
+                <td>合作夥伴</td>
             </tr>
-            
+
             <tr>
                 <td class="content-left">
                     <p class="highlight">ISO 14064-1</p>
@@ -150,21 +216,31 @@
                 </td>
                 <td>
                     <div class="image-grid">
-                        <a href="https://www.tuv.com/taiwan/tw/"><img src="https://github.com/Sethjesus/Photo/blob/main/TUV.jpg?raw=true" alt="合作夥伴2"></a>
-                        <a href="https://www.sgs.com.tw/"><img src="https://github.com/Sethjesus/Photo/blob/main/SGS.jpg?raw=true" alt="合作夥伴3"></a>
-                        <a href="https://international.afnor.com/zh-tw/%E6%88%91%E5%80%91%E7%9A%84%E5%9C%8B%E5%AE%B6/%E8%87%BA%E7%81%A3/"><img src="https://github.com/Sethjesus/Photo/blob/main/afnor.jpg?raw=true" alt="合作夥伴4"></a>
-                        <a href="https://www.bsigroup.com/zh-TW/"><img src="https://github.com/Sethjesus/Photo/blob/main/bsi.jpg?raw=true" alt="合作夥伴5"></a>
-                        <a href="https://www.ares-registration.com/#gsc.tab=0"><img src="https://github.com/Sethjesus/Photo/blob/main/Ares.jpg?raw=true" alt="合作夥伴6"></a>
+                        <a href="https://www.tuv.com/taiwan/tw/">
+                            <img src="https://github.com/Sethjesus/Photo/blob/main/TUV.jpg?raw=true">
+                        </a>
+                        <a href="https://www.sgs.com.tw/">
+                            <img src="https://github.com/Sethjesus/Photo/blob/main/SGS.jpg?raw=true">
+                        </a>
+                        <a href="https://international.afnor.com/zh-tw/">
+                            <img src="https://github.com/Sethjesus/Photo/blob/main/afnor.jpg?raw=true">
+                        </a>
+                        <a href="https://www.bsigroup.com/zh-TW/">
+                            <img src="https://github.com/Sethjesus/Photo/blob/main/bsi.jpg?raw=true">
+                        </a>
+                        <a href="https://www.ares-registration.com/">
+                            <img src="https://github.com/Sethjesus/Photo/blob/main/Ares.jpg?raw=true">
+                        </a>
                     </div>
                 </td>
             </tr>
         </table>
     </div>
-    <footer>
-        <div class="footer-content">© 2025 由景煬低碳管理方案團隊製作</div>
-        <a href="https://jpesg.netlify.app/" class="back-button">回首頁</a>
-    </footer>
+</main>
+
+<footer>
+    © 2026 由景沛低碳管理方案團隊製作
+</footer>
+
 </body>
 </html>
-
-
